@@ -50,13 +50,9 @@ namespace BPCalculator
                 {
                     return BPCategory.PreHigh;
                 }
-                else if (Systolic >= PreHighBPSystolicMax && Diastolic >= PreHighBPDiastolicMax)
-                {
-                    return BPCategory.High;
-                }
                 else
                 {
-                    return BPCategory.Invalid;
+                    return BPCategory.High;
                 }
             }
         }
