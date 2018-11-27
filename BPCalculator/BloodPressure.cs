@@ -9,8 +9,7 @@ namespace BPCalculator
         [Display(Name="Low Blood Pressure")] Low,
         [Display(Name="Normal Blood Pressure")]  Normal,
         [Display(Name="Pre-High Blood Pressure")] PreHigh,
-        [Display(Name ="High Blood Pressure")]  High,
-        [Display(Name = "Unable to calculate Blood Pressure")] Invalid
+        [Display(Name ="High Blood Pressure")]  High
     };
 
     public class BloodPressure
@@ -50,13 +49,9 @@ namespace BPCalculator
                 {
                     return BPCategory.PreHigh;
                 }
-                else if (Systolic >= PreHighBPSystolicMax && Diastolic >= PreHighBPDiastolicMax)
-                {
-                    return BPCategory.High;
-                }
                 else
                 {
-                    return BPCategory.Invalid;
+                    return BPCategory.High;
                 }
             }
         }
