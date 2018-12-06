@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 pool:
-  vmImage: 'Ubuntu 16.04'
+  vmImage: 'VS2017-Win2016'
 
 variables:
   buildConfiguration: 'Release'
@@ -17,4 +17,4 @@ steps:
   inputs:
     command: test
     projects: '**/*UnitTests/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"
