@@ -23,7 +23,7 @@ steps:
     extraProperties: |
      sonar.organization=null-null99149
      sonar.branch.name=$(Build.SourceBranchName)
- - task: DotNetCoreCLI@2
+- task: DotNetCoreCLI@2
   inputs:
     command: test
     projects: '**/*UnitTests/*.csproj'
