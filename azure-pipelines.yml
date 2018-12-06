@@ -17,4 +17,4 @@ steps:
   inputs:
     command: test
     projects: '**/*UnitTests/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
