@@ -26,8 +26,8 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
    command: test
-    projects: '**/*UnitTests/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+   projects: '**/*UnitTests/*.csproj'
+   arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 - task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
 - script: dotnet publish BPCalculator.sln /nologo /p:PublishProfile=Release /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:platform="Any CPU" /p:configuration="Release"
