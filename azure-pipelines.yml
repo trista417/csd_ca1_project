@@ -10,7 +10,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-#- script: dotnet restore
 #- script: dotnet build --configuration $(buildConfiguration)
 #  displayName: 'dotnet build $(buildConfiguration)'
 - task: SonarSource.sonarcloud.14d9cde6-c1da-4d55-aa01-2965cd301255.SonarCloudPrepare@1
@@ -23,17 +22,26 @@ steps:
    extraProperties: |
     sonar.organization=null-null99149
     sonar.branch.name=$(Build.SourceBranchName)
+
 - task: DotNetCoreCLI@2
+  displayName: 'Run Unit Tests'
   inputs:
    command: test
    projects: '**/*UnitTests/*.csproj'
    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+   
 - task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
+  
 - script: dotnet publish BPCalculator.sln /nologo /p:PublishProfile=Release /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:platform="Any CPU" /p:configuration="Release"
+  displayName: 'Publish'
+  
 - task: CopyFiles@2
+  displayName: 'Copy Files'
   inputs:
     SourceFolder: '$(build.sourcesdirectory)'
     Contents: '**\bin\$(BuildConfiguration)\**'
     TargetFolder: '$(build.artifactstagingdirectory)'
+    
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish Build Artifacts'
