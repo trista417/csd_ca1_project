@@ -38,12 +38,12 @@ steps:
 - script: dotnet publish BPCalculator.sln /nologo /p:PublishProfile=Release /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:platform="Any CPU" /p:configuration="Release"
   displayName: 'Publish solution'
   
-- task: CopyFiles@2
-  displayName: 'Copy Files'
-  inputs:
-    SourceFolder: '$(build.sourcesdirectory)'
-    Contents: '**\bin\$(BuildConfiguration)\**'
-    TargetFolder: '$(build.artifactstagingdirectory)'
+#- task: CopyFiles@2
+# displayName: 'Copy Files'
+#inputs:
+# SourceFolder: '$(build.sourcesdirectory)'
+#Contents: '**\bin\$(BuildConfiguration)\**'
+#TargetFolder: '$(build.artifactstagingdirectory)'
     
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Build Artifacts'
