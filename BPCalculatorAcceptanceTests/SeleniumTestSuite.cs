@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using OpenQA.Selenium;
 
-// NuGet install PhantomJS driver (or Chrome or Firefox...)
+// NuGet install Chrome driver
 
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -42,8 +42,6 @@ namespace BPCalculatorAcceptanceTests
         [TestMethod]
         public void TestSystolicRangeValidation()
         {
-            // PhantomJSDriver will work in hosted agent
-            // in VSTS (others won't)
             using (IWebDriver driver = new ChromeDriver(Environment.GetEnvironmentVariable("ChromeWebDriver")))
             {
                 driver.Navigate().GoToUrl(webAppUri);
@@ -92,13 +90,14 @@ namespace BPCalculatorAcceptanceTests
                 driver.Navigate().GoToUrl(webAppUri);
                 
                 IWebElement systolicElement = driver.FindElement(By.Id("systolic-input"));
-
                 systolicElement.Clear();
+                // Reassign systolicElement variable due to onchange event being triggered (Selenium bug)
                 systolicElement = driver.FindElement(By.Id("systolic-input"));
                 systolicElement.SendKeys("110");
 
                 IWebElement diastolicElement = driver.FindElement(By.Id("diastolic-input"));
                 diastolicElement.Clear();
+                // Reassign diastolicElement variable due to onchange event being triggered (Selenium bug)
                 diastolicElement = driver.FindElement(By.Id("diastolic-input"));
                 diastolicElement.SendKeys("70");
 
