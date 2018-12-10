@@ -8,12 +8,13 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  testConfiguration: '--configuration $(buildConfiguration) --collect "Code coverage"'
+  publishConfiguration: '/nologo /p:PublishProfile=$(buildConfiguration) /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:platform="Any CPU" /p:configuration=$(buildConfiguration)'
   sonarOrganization: 'null-null99149'
   sonarProject: 'CSD_CA1'
   testProjects: '**/*UnitTests/*.csproj'
 
 steps:
-
 - task: SonarSource.sonarcloud.14d9cde6-c1da-4d55-aa01-2965cd301255.SonarCloudPrepare@1
   displayName: 'Prepare analysis on SonarQube'
   inputs:
@@ -30,12 +31,12 @@ steps:
   inputs:
    command: test
    projects: $(testProjects)
-   arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+   arguments: $(testConfiguration)
    
 - task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
   
-- script: dotnet publish BPCalculator.sln /nologo /p:PublishProfile=Release /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:platform="Any CPU" /p:configuration="Release"
+- script: dotnet publish BPCalculator.sln $(publishConfiguration)
   displayName: 'Publish solution'
   
 - task: CopyFiles@2
