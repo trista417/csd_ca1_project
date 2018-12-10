@@ -35,7 +35,7 @@ namespace BPCalculatorAcceptanceTests
         public void Setup()
         {
             //  this.webAppUri = testContextInstance.Properties["webAppUri"].ToString();
-            this.webAppUri = "https://bmicalculator-csdca1-staging.azurewebsites.net/bloodpressure";
+            this.webAppUri = "https://csd-bpcalculator-qa.azurewebsites.net/bloodpressure";
         }
 
         // one unit test
