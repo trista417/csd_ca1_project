@@ -6,10 +6,8 @@
 pool:
   vmImage: 'VS2017-Win2016'
 
-job: CI Build
-  displayName:'CI Build'
-
 variables:
+  job: 'CI Build'
   buildConfiguration: 'Release'
   testConfiguration: '--configuration $(buildConfiguration) --collect "Code coverage"'
   publishConfiguration: '/nologo /p:PublishProfile=$(buildConfiguration) /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /maxcpucount:1 /p:platform="Any CPU" /p:configuration=$(buildConfiguration)'
